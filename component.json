@@ -1,0 +1,103 @@
+{
+    "title": "Fahrplan-Free",
+    "description": "A RESTful webservice to request a railway journey - FREE plan with restricted access (max. 10 requests per minute). Please ignore the message in the API Console about the access token.\n\nRegister to use an less restricted version, which requires an access token.",
+    "docsUrl": "",
+    "url": "https://api.apis.guru/v2/specs/deutschebahn.com/fahrplan/v1/swagger.json",
+    "envVars": {},
+    "credentials": {
+        "fields": {
+            "server": {
+                "label": "Server",
+                "viewClass": "SelectView",
+                "model": [
+                    "https://api.deutschebahn.com/freeplan/v1",
+                    "http://api.deutschebahn.com/freeplan/v1",
+                    "--- Custom URL"
+                ],
+                "required": true
+            },
+            "otherServer": {
+                "label": "Custom Server URL",
+                "viewClass": "TextFieldView"
+            }
+        }
+    },
+    "triggers": {
+        "startFlow": {
+            "main": "./lib/triggers/startFlow.js",
+            "type": "polling",
+            "title": "Start Flow",
+            "fields": {}
+        }
+    },
+    "actions": {
+        "get_arrivalBoard__id_": {
+            "main": "./lib/actions/get_arrivalBoard__id_.js",
+            "title": "Get arrival board of a location",
+            "description": "Get arrival board at a given location at a given daten and time.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/get_arrivalBoard__id_.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "get_departureBoard__id_": {
+            "main": "./lib/actions/get_departureBoard__id_.js",
+            "title": "Get departure board of a location",
+            "description": "Get departure board at a given location at a given daten and time.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/get_departureBoard__id_.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "get_journeyDetails__id_": {
+            "main": "./lib/actions/get_journeyDetails__id_.js",
+            "title": "Get details about a single journey",
+            "description": "Retrieve details of a journey. The id of journey should come from an arrival board or a departure board.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/get_journeyDetails__id_.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "get_location__name_": {
+            "main": "./lib/actions/get_location__name_.js",
+            "title": "Get location information",
+            "description": "Get information about locations matching the given name or name fragment",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/get_location__name_.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        }
+    }
+}
